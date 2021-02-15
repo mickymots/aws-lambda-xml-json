@@ -1,0 +1,24 @@
+{
+  "name": "aws-lambda-xml-json",
+  "version": "1.0.0",
+  "description": "A lambda function that converts XML to Json",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mickymots/aws-lambda-xml-json.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mickymots/aws-lambda-xml-json/issues"
+  },
+  "homepage": "https://github.com/mickymots/aws-lambda-xml-json#readme",
+  "dependencies": {
+    "xml-js": "^1.6.11",
+    "xml2js": "^0.4.23",
+    "xml2json": "^0.12.0"
+  }
+}
