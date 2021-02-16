@@ -1,0 +1,28 @@
+aws lambda create-function --function-name CreateJson \
+--zip-file fileb://function.zip --handler index.handler --runtime nodejs10.x \
+--timeout 10 --memory-size 512 \
+--role arn:aws:iam::<account_id>:role/lambda-s3-role
+
+
+aws lambda add-permission --function-name CreateJson --principal s3.amazonaws.com \
+--statement-id s3invoke --action "lambda:InvokeFunction" \
+--source-arn arn:aws:s3:::923alansource \
+--source-account <account_id>
+
+
+aws lambda create-function --function-name CreateJson \
+--zip-file fileb://function.zip --handler index.handler --runtime nodejs10.x \
+--timeout 10 --memory-size 1024 \
+--role arn:aws:iam::<account_id>:role/lambda-s3-role
+
+
+
+aws lambda add-permission --function-name CreateThumbnail --principal s3.amazonaws.com \
+--statement-id s3invoke --action "lambda:InvokeFunction" \
+--source-arn arn:aws:s3:::sourcebucket \
+--source-account account-id
+
+
+
+aws lambda invoke --function-name CreateJson --invocation-type Event \
+--payload file://inputFile.txt outputfile.txt

@@ -2,6 +2,31 @@
 A lambda function that converts XML to Json
 
 
+# mjar-reso-xml
+This is an AWS SAM project to deploy a lambda functions that reads an XML file from S3 Bucket and write to another S3 bucket in JSON format.
+
+### To Create a SAM Build
+
+* sam build
+
+### To Deploy SAM
+
+* sam deploy --guided
+
+
+***note*** you need to provide the name of source bucket and target bucket
+
+
+### Important note on S3 Bucket names
+
+ provide target bucket name as : <source_bucket_name>-target
+
+ e.g.
+  * source_bucket: metadata_source
+  * target_bucket: metadata_source-target
+
+
+
 # Short Summary
 Lambda Function Should
 1. Grab the XML "Metadata.xml" file from S3 bucket1.

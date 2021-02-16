@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  reso-xmljson
+
+Parameters:
+  SourceBucketName:
+    Type: String
+    Description: "REQUIRED: Unique S3 bucket name to use for the app."
+
+  TargetBucketName:
+    Type: String
+    Description: "REQUIRED: Unique S3 bucket name to use for the app."
+
+Resources:
+  S3XMLToJsonFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/s3-xml-json.s3XMLToJsonHandler
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 60
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Ref SourceBucketName
+        - S3WritePolicy:
+            BucketName: !Ref TargetBucketName
+      Events:
+        S3NewObjectEvent:
+          Type: S3
+          Properties:
+            Bucket: !Ref SourceBucket
+            Events: s3:ObjectCreated:*
+            Filter:
+              S3Key:
+                Rules:
+                  - Name: suffix
+                    Value: ".xml"
+  SourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref SourceBucketName
+
+  TargetBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref TargetBucketName
